@@ -1,0 +1,33 @@
+SHOW TABLES;
+SELECT first_name, last_name FROM actor;
+SELECT first_name, last_name FROM actor WHERE first_name='john';
+SELECT first_name, last_name FROM actor WHERE last_name='Neeson';
+SELECT actor_id FROM actor WHERE (actor_id % 10)=0;
+SELECT * FROM film WHERE film_id=100;
+SELECT rating FROM film WHERE rating = 'R';
+SELECT rating FROM film WHERE rating != 'R';
+SELECT * FROM film;
+SELECT title, length FROM film ORDER BY length ASC LIMIT 10;
+SELECT title, length FROM film WHERE length=185;
+SELECT special_features FROM film WHERE special_features LIKE '%Deleted Scenes%';
+SELECT last_name FROM actor GROUP BY last_name HAVING COUNT(DISTINCT first_name=1) ORDER BY last_name DESC;
+SELECT last_name FROM actor GROUP BY last_name HAVING COUNT(DISTINCT first_name>1) ORDER BY last_name DESC;
+SELECT * FROM film_actor;
+SELECT
+    first_name, last_name
+FROM
+    actor
+WHERE
+    actor_id = (SELECT
+            actor_id
+        FROM
+            film_actor
+        GROUP BY actor_id
+        HAVING COUNT(DISTINCT film_id) > 1
+        ORDER BY COUNT(DISTINCT film_id) DESC
+        LIMIT 1);
+SELECT AVG(length) AS avg_runtime FROM film_list;
+SELECT title FROM film_list WHERE `description` like '%robot%';
+Select * FROM film WHERE release_year = 2010;
+SELECT * FROM film_category t1 JOIN category t2 ON t1.film_category=t2.category;
+SELECT
